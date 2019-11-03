@@ -6,3 +6,35 @@ Medium green: #55c57a
 Dark green: #28b485
 
 */
+
+/* some browsers have issues or extra things, so we're resetting all the styles with the universal selector */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* no border size added by default */
+}
+
+/* inherited styles are passed in, hence why we're doing this in the body tag. Better than universal selector */
+body {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #777777;
+    padding: 24px; /* white padding around full page */
+}
+
+.header {
+    height: 95vh;
+    /* apply linear gradient over background image, order matters for priority*/
+    background-image: linear-gradient(
+        to right bottom,
+         rgba(126, 213, 111, 0.8),
+         rgba(40, 180, 133, 0.8)),
+          url("../img/hero.jpg"
+    );
+    background-size: cover;
+    background-position: top;
+    /* clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 0% 100%); */
+    clip-path: polygon(50% 0, 100% 100%, 0 100%); /* Use https://bennettfeely.com/clippy/ for clip path generation */
+}
