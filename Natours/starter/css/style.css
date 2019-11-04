@@ -57,6 +57,8 @@ body {
     left: 50%;
     /* To fix the div centering, we need to move the origin point of the div to the 50/50 mark */
     transform: translate(-50%, -50%);
+    /* Make sure that text align in the parent div for it to effect children */
+    text-align: center;
 }
 
 .heading-primary {
@@ -64,6 +66,7 @@ body {
     text-transform: uppercase;
 
     backface-visibility: hidden;
+    margin-bottom: 64px;
 }
 
 .heading-primary-main {
@@ -139,4 +142,83 @@ body {
         opacity: 1;
         transform: translate(0);
     }
+}
+
+@keyframes moveInBottom {
+    /* we can define what should happen in the animation at whatever percentage is completed */
+    0% {
+        opacity: 0;
+        transform: translateY(32px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+/* this is a link pseudo class --> style elements under special conditions */
+.btn:link,
+/* this is the visited state after the user has interacted with the element */
+.btn:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 15px 40px;
+    display: inline-block;
+
+    border-radius: 100px;
+    /* defines how long our transition should take to the other pseudo states (hover/active) should be on the root class */
+    transition: all 0.2s;
+    position: relative;
+}
+
+.btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.23);
+}
+
+/* on click what we should do */
+.btn:active {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.23);
+}
+
+.btn-white {
+    background-color: #ffffff;
+    color: #777777;
+}
+
+.btn-animated {
+    animation: moveInBottom 0.5s ease-out 0.9s;
+    animation-fill-mode: backwards; /* will put in the animation style of 0% on page load */
+}
+
+/* does things after the click */
+.btn::after {
+    /* Content and display need to be defined */
+    content: "";
+    display: inline-block;
+
+    /* This would be 100% the height + width of the button */
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+
+    /* but this new button behind the current one (need to also make parent button relative) */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+
+    /* add in our transition */
+    transition: all .4s;
+}
+
+.btn-white::after {
+    background-color: #ffffff;
+}
+
+.btn:hover::after {
+    transform: scale(1.5);
+    opacity: 0;
 }
