@@ -35,6 +35,108 @@ body {
     );
     background-size: cover;
     background-position: top;
-    /* clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 0% 100%); */
-    clip-path: polygon(50% 0, 100% 100%, 0 100%); /* Use https://bennettfeely.com/clippy/ for clip path generation */
+    position: relative; /* doing this so we can relatively position child elements inside the header */
+    clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 0% 100%);
+    /* clip-path: polygon(50% 0, 100% 100%, 0 100%); Use https://bennettfeely.com/clippy/ for clip path generation */
+}
+
+.logo-box {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+}
+
+.logo {
+    height: 35px;
+}
+
+.text-box {
+    position: absolute;
+    /* The problem with centering using just top and left is that we put the top left corner of the div at 50% not the center of the div */
+    top: 40%;
+    left: 50%;
+    /* To fix the div centering, we need to move the origin point of the div to the 50/50 mark */
+    transform: translate(-50%, -50%);
+}
+
+.heading-primary {
+    color: #ffffff;
+    text-transform: uppercase;
+
+    backface-visibility: hidden;
+}
+
+.heading-primary-main {
+    /* block elements occupy 100% of the width of the element */
+    display: block; 
+    font-size: 64px;
+    font-weight: 400;
+    letter-spacing: 32px;
+    
+    /* add in animation and duration of it here */
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+
+    /*
+    animation-delay: 1s; -- used for when you want to start an animation later
+    animation-iteration-count: 3; -- animation happens 3 times
+    animation-timing-function: ease-in; defines the acceleration of how fast to complete the frames
+    */
+}
+
+.heading-primary-sub {
+    display: block;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 16px;
+
+    /* add in animation and duration of it here */
+    /* animation-name: moveInRight;
+    animation-duration: 1s; */
+
+    /* we can simplify the animation using this one-liner */
+    animation: moveInRight 1s;
+}
+
+/* create an animation */
+@keyframes moveInLeft {
+    /* we can define what should happen in the animation at whatever percentage is completed */
+    0% {
+        opacity: 0;
+        transform: translateX(-128px);
+    }
+
+    /* Just rotations fun */
+    /* 60% {
+        transform: rotate3d(1, -1, 5, 180deg);
+    } */
+
+    /* Adding in slight bounce back */
+    80% {
+        transform: translateX(16px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+/* create an animation */
+@keyframes moveInRight {
+    /* we can define what should happen in the animation at whatever percentage is completed */
+    0% {
+        opacity: 0;
+        transform: translateX(128px);
+    }
+
+    /* Adding in slight bounce back */
+    80% {
+        transform: translateX(-16px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
 }
